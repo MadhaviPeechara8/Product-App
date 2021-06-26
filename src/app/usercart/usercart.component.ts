@@ -12,6 +12,21 @@ export class UsercartComponent implements OnInit {
 userCartObj;
   ngOnInit(): void {
     let username=localStorage.getItem('username')
+    /*this.userService.dataObservable.subscribe(
+      res=>{
+        if(res["message"]==="Cart Empty"){
+          alert("User cart is Empty")
+        }else{
+          //console.log(this.userCartObj)
+          this.userCartObj=res["latestcartObj"];
+          //console.log("user cart obj is",this.userCartObj);
+        }
+      },
+      err=>{
+        console.log("err in reading cart",err)
+        alert("Something went wrong in fetching cart items")
+      }
+    )*/
     this.userService.getProductsFromUserCart(username).subscribe(
       res=>{
         if(res["message"]==="Cart Empty"){

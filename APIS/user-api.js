@@ -198,12 +198,14 @@ userApi.post("/add-to-cart",expressErrorHandler(async (req,res,next)=>{
     let newUsercartObj={username:newProductObject.username,products}
     //console.log(newUsercartObj)
     await usercartcollectionObject.insertOne(newUsercartObj)
-    res.send({message:"New Product added"})
+    let latestcartObj=await usercartcollectionObject.findOne({username:newProductObject.username})
+    res.send({message:"New Product added",latestcartObj:latestcartObj})
     }
     else{
         usercartObj.products.push(newProductObject.productObject)
         await usercartcollectionObject.updateOne({username:newProductObject.username},{$set:{...usercartObj}})
-        res.send({message:"New Product added"})
+        let latestcartObj=await usercartcollectionObject.findOne({username:newProductObject.username})
+    res.send({message:"New Product added",latestcartObj:latestcartObj})
     }
 }))
 //read cart items

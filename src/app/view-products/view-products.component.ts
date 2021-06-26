@@ -32,6 +32,7 @@ export class ViewProductsComponent implements OnInit {
     this.userService.sendProductToUserCart(newUserProductObj).subscribe(
       res=>{
         alert(res.message)
+        this.userService.updateDataObservable(res['latestcartObj']);
       },
       err=>{
         console.log("error in posting product to cart",err);
