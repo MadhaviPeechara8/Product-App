@@ -17,5 +17,6 @@
         <input type="date" class="form-control" id="dob" placeholder="Email" name="dob" ngModel>
         <label for="dob">Date of birth</label>
     </div>
+    <input type="file" name="photo" class="form-control" ngModel (change)="selectFile($event)">
     <button class="btn btn-success" type="submit">Signup</button>
 </form>

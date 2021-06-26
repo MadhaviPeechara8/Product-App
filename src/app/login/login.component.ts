@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(userCredentials){
+   
     this.us.loginUser(userCredentials).subscribe(
       res=>{
         if(res.message==="login success"){
@@ -23,8 +24,18 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token",res.token)
           localStorage.setItem("username",res.username)
           localStorage.setItem("userObj",JSON.stringify(res.userObj))
+          //update userloginstatus
+          this.us.userLoginStatus=true;
+         
+          if(userCredentials.type==="user"){
           //navigate to user profile
           this.router.navigateByUrl(`userprofile/${res.username}`)
+          }
+          if(userCredentials.type==="admin"){
+            //navigate to admin profile
+            this.router.navigateByUrl(`/admin`)
+            }
+
         }
         else{
           alert(res.message)
